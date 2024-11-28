@@ -59,50 +59,69 @@ export default function App() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <FlatList
-        data={messageList}
-        renderItem={({ item }) => {
-          return (
-            <View style={styles.message}>
-              <Text>{item.message}</Text>
-            </View>
-          );
-        }}
-      />
-      <View style={styles.messageWriter}>
-        <TextInput
-          onChangeText={handleMessageChange}
-          placeholder="enter message"
-          style={styles.textInput}
-          value={message}
+      <View style={styles.inner}>
+        <FlatList
+          data={messageList}
+          style={styles.messageList}
+          renderItem={({ item }) => {
+            return (
+              <View style={styles.message}>
+                <Text>{item.message}</Text>
+              </View>
+            );
+          }}
         />
-        <Pressable onPress={handleMessageSend} style={styles.button}>
-          <Text>Send</Text>
-        </Pressable>
-      </View>
+        <View style={styles.messageWriter}>
+          <TextInput
+            onChangeText={handleMessageChange}
+            placeholder="enter message"
+            style={styles.textInput}
+            value={message}
+          />
+          <Pressable onPress={handleMessageSend} style={styles.button}>
+            <Text style={styles.buttonLabel}>Send</Text>
+          </Pressable>
+        </View>
 
-      <StatusBar style="auto" />
+        <StatusBar style="auto" />
+      </View>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "pink",
+    backgroundColor: "white",
+    flex: 1,
   },
+
+  inner: {
+    paddingHorizontal: 12,
+    paddingTop: 12,
+  },
+
   textInput: {
     backgroundColor: "#dadada",
     textAlign: "center",
-    paddingVertical: 12,
+    paddingVertical: 24,
   },
   button: {
-    backgroundColor: "lightgreen",
     borderRadius: 12,
+    marginTop: 12,
+    backgroundColor: "lightgreen",
+    maxWidth: 120,
+  },
+  buttonLabel: {
+    paddingVertical: 12,
+    textAlign: "center",
+    backgroundColor: "lightgreen",
+    borderRadius: 9,
   },
   message: {
     padding: 9,
     backgroundColor: "#fafafa",
     borderWidth: 1,
+    borderColor: "#bababa",
     shadowColor: "#eaeaea",
     shadowOpacity: 0.2,
     shadowRadius: 2,
@@ -110,7 +129,7 @@ const styles = StyleSheet.create({
       width: 5,
       height: 0,
     },
-    margin: 3,
+    marginBottom: 3,
     borderRadius: 6,
   },
 });
